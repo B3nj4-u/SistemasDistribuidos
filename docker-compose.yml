@@ -1,0 +1,22 @@
+version: "3"
+services:
+  servidor:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "12345:12345"
+  cliente_se_exime:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - servidor
+    entrypoint: ["python", "ClienteSeExime.py", "localhost"]
+  cliente_para_examen:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - servidor
+    entrypoint: ["python", "ClienteParaExamen.py", "localhost"]
